@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.fitnessapp.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+
+        <action
+            android:id="@+id/action_mainFragment_to_workoutChoiceFragment"
+            app:destination="@id/workoutChoiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutChoiceFragment"
+        android:name="com.example.fitnessapp.WorkoutChoiceFragment"
+        android:label="fragment_workout_choice"
+        tools:layout="@layout/fragment_workout_choice" >
+        <action
+            android:id="@+id/action_workoutChoiceFragment_to_calculatedWorkout"
+            app:destination="@id/calculatedWorkout" />
+        <action
+            android:id="@+id/action_workoutChoiceFragment_to_dietFragment"
+            app:destination="@id/dietFragment" />
+        <argument
+            android:name="userArg"
+            app:argType="com.example.fitnessapp.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/calculatedWorkout"
+        android:name="com.example.fitnessapp.CalculatedWorkout"
+        android:label="CalculatedWorkout" >
+        <action
+            android:id="@+id/action_calculatedWorkout_to_congratsFragment"
+            app:destination="@id/congratsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/congratsFragment"
+        android:name="com.example.fitnessapp.CongratsFragment"
+        android:label="fragment_congrats"
+        tools:layout="@layout/fragment_congrats" />
+    <fragment
+        android:id="@+id/dietFragment"
+        android:name="com.example.fitnessapp.DietFragment"
+        android:label="fragment_diet"
+        tools:layout="@layout/fragment_diet" />
+</navigation>
