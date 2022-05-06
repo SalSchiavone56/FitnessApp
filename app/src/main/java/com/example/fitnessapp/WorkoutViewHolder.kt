@@ -9,7 +9,12 @@ class WorkoutViewHolder(val binding: ListItemLayoutBinding) :
     fun bindWorkout(workout: Workout) {
         currentWorkout = workout
         binding.performText.text = currentWorkout.workoutName
-        binding.weightTextview.text = currentWorkout.weight.toString()
+        if (currentWorkout.weight==0){
+            binding.weightTextview.text=""
+        }
+        else{
+            binding.weightTextview.text = currentWorkout.weight.toString()
+        }
         binding.repText.text=currentWorkout.reps
     }
 

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/perform_text"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:text="Workout"
@@ -19,21 +19,22 @@
 
     <TextView
         android:id="@+id/weight_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Weight"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/perform_text"
         app:layout_constraintStart_toEndOf="@+id/perform_text"
         app:layout_constraintTop_toTopOf="@+id/perform_text" />
 
     <TextView
         android:id="@+id/rep_text"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="Reps"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/weight_textview"
-        app:layout_constraintStart_toEndOf="@+id/perform_text"
+        app:layout_constraintStart_toStartOf="@+id/perform_text"
         app:layout_constraintTop_toBottomOf="@+id/perform_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>
