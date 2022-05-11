@@ -26,6 +26,9 @@ class MainFragment : Fragment() {
         binding.ARadiobutton.setOnClickListener {
             gender=true
         }
+        binding.BRadiobutton.setOnClickListener {
+            gender=false
+        }
 
         binding.nextButton.setOnClickListener{
             val username=binding.nameView.text.toString()

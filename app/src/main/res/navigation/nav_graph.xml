@@ -36,6 +36,24 @@
         <action
             android:id="@+id/action_calculatedWorkout_to_congratsFragment"
             app:destination="@id/congratsFragment" />
+        <argument
+            android:name="w1Arg"
+            app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="w2Arg"
+            app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="w3Arg"
+            app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="w4Arg"
+            app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="w5Arg"
+            app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="w6Arg"
+            app:argType="com.example.fitnessapp.Workout" />
     </fragment>
     <fragment
         android:id="@+id/congratsFragment"

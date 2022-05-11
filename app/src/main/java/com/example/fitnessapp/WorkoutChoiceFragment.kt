@@ -23,13 +23,13 @@ class WorkoutChoiceFragment : Fragment() {
         val args = WorkoutChoiceFragmentArgs.fromBundle(requireArguments())
         var w=args.userArg.weight
         if(!args.userArg.gender)
-            w /= 1.6.roundToInt()
+            w /= 1.6.toInt()
 
         if(args.userArg.age>=61) {
-            w /= 1.5.roundToInt()
+            w /= 1.5.toInt()
         }
         else if(args.userArg.age in 40..60) {
-            w /= 1.2.roundToInt()
+            w /= 1.2.toInt()
         }
 
         binding.buildMuscleButton.setOnClickListener {
@@ -39,7 +39,7 @@ class WorkoutChoiceFragment : Fragment() {
             val deadlift=deadlift(w)
             val curl=curl(w)
             val lunge=lunge(w)
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout()
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(benchPress,squat,press,deadlift,curl,lunge)
             rootview.findNavController().navigate(action)
         }
         binding.maintainMuscleButton.setOnClickListener{
@@ -48,9 +48,16 @@ class WorkoutChoiceFragment : Fragment() {
             val squat=squat(w)
             val lunge=lunge(w)
             val curl=curl(w)
-            val pusUps=pushUp()
+            val pushUps=pushUp()
             val sitUps=sitUp()
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout()
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(bench,squat,lunge,curl,pushUps, sitUps)
+            rootview.findNavController().navigate(action)
+        }
+        binding.cardioButton.setOnClickListener{
+            val rope=jumpRope()
+            val run=run(args.userArg.age, args.userArg.gender)
+            val burpees=burpees()
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(rope, run, burpees, run, run, run)
             rootview.findNavController().navigate(action)
         }
         binding.dietButton.setOnClickListener {
@@ -82,7 +89,7 @@ class WorkoutChoiceFragment : Fragment() {
         val weight: Int
             if (weigh <= 150)
                 weight = weigh+15
-            else weight = weigh*1.2.roundToInt()
+            else weight = weigh*1.2.toInt()
 
         return Workout(w, weight, r)
     }
@@ -91,8 +98,8 @@ class WorkoutChoiceFragment : Fragment() {
         val r = "3 sets of 10-12"
         val weight: Int
             if (weigh<= 150)
-                weight = weigh*0.34.roundToInt()
-            else weight = weigh*0.42.roundToInt()
+                weight = (weigh*0.34).toInt()
+            else weight = (weigh*0.42).toInt()
 
         return Workout(w, weight, r)
     }
@@ -101,8 +108,8 @@ class WorkoutChoiceFragment : Fragment() {
         val r = "3 sets of 5-8"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*1.38.roundToInt()
-            else weight = weigh*1.43.roundToInt()
+                weight = weigh*1.38.toInt()
+            else weight = weigh*1.43.toInt()
 
         return Workout(w, weight, r)
     }
@@ -111,8 +118,8 @@ class WorkoutChoiceFragment : Fragment() {
         val r = "3 sets of 8-10"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*0.2.roundToInt()
-            else weight = weigh*0.25.roundToInt()
+                weight = weigh*0.2.toInt()
+            else weight = weigh*0.25.toInt()
 
         return Workout(w, weight, r)
     }
@@ -121,8 +128,8 @@ class WorkoutChoiceFragment : Fragment() {
         val r = "3 sets of 5-8 Each Leg"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*0.4.roundToInt()
-            else weight = weigh*0.43.roundToInt()
+                weight = weigh*0.4.toInt()
+            else weight = weigh*0.43.toInt()
 
         return Workout(w, weight, r)
     }
@@ -135,17 +142,23 @@ class WorkoutChoiceFragment : Fragment() {
     fun jumpRope(): Workout{
         return Workout("Jump-Rope", 0, "3 sets of 1 minute Straight")
     }
-    fun run(age:Int){
-        val s:String
+    fun run(age:Int, g:Boolean):Workout{
+        var x=0
         if (age<20)
-            s="6 minutes 45 Seconds"
+            x=405
         else if (age in 20..39)
-            s="6 minutes 40 Seconds"
+            x=400
         else if (age in 40..59)
-            s="7 minutes 32 Seconds"
+            x=452
         else if (age in 60..70)
-            s="8 minutes 32 Seconds"
-        else s="10 minutes 20 Seconds"
+            x=512
+        else x=620
+        if(!g && age<60)
+            x += 70
+        else if (!g)
+            x += 140
+        val s="Average Mile Run Time for Weight/Gender: ${x/60} minutes ${x%60}seconds"
+        return Workout("1 Mile Run",0, s)
     }
     fun burpees(): Workout{
         return Workout("Burpees", 0,"2 sets of 15" )

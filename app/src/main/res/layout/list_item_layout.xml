@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/weight_textview"
-        android:layout_width="100dp"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Weight"
