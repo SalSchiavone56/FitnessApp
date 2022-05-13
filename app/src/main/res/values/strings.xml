@@ -4,6 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_name">Enter Name</string>
     <string name="enter_age">Enter Age</string>
-    <string name="enter_weight">Enter Weight (pounds, numbers only)</string>
-    <string name="enter_height">Enter Height (in inches, numbers only)</string>
+    <string name="enter_weight">Enter Weight (pounds)</string>
+    <string name="enter_height">Enter Height (in inches)</string>
 </resources>

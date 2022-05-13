@@ -23,15 +23,15 @@ class WorkoutChoiceFragment : Fragment() {
         val args = WorkoutChoiceFragmentArgs.fromBundle(requireArguments())
         var w=args.userArg.weight
         if(!args.userArg.gender)
-            w /= 1.6.toInt()
+            w =(w/1.6).toInt()
 
         if(args.userArg.age>=61) {
-            w /= 1.5.toInt()
+            w =(w/1.5).toInt()
         }
         else if(args.userArg.age in 40..60) {
-            w /= 1.2.toInt()
+            w =(w/1.2).toInt()
         }
-
+    binding.nameText.text="Welcome ${args.userArg.username}!"
         binding.buildMuscleButton.setOnClickListener {
             val benchPress = bench(w)
             val squat=squat(w)
@@ -43,7 +43,7 @@ class WorkoutChoiceFragment : Fragment() {
             rootview.findNavController().navigate(action)
         }
         binding.maintainMuscleButton.setOnClickListener{
-            w /= 1.15.roundToInt()
+            w =(w/1.5).toInt()
             val bench=bench(w)
             val squat=squat(w)
             val lunge=lunge(w)
@@ -81,7 +81,7 @@ class WorkoutChoiceFragment : Fragment() {
                 weight = weigh - 20
             else weight = weigh - 17
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=SCVCLChPQFY")
     }
     fun squat(weigh:Int): Workout {
         val w = "Squat"
@@ -89,9 +89,9 @@ class WorkoutChoiceFragment : Fragment() {
         val weight: Int
             if (weigh <= 150)
                 weight = weigh+15
-            else weight = weigh*1.2.toInt()
+            else weight = (weigh*1.2).toInt()
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=ultWZbUMPL8")
     }
     fun shoulderPress(weigh:Int): Workout {
         val w = "Shoulder Press"
@@ -101,46 +101,46 @@ class WorkoutChoiceFragment : Fragment() {
                 weight = (weigh*0.34).toInt()
             else weight = (weigh*0.42).toInt()
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=5yWaNOvgFCM")
     }
     fun deadlift(weigh:Int): Workout {
         val w = "Deadlift"
         val r = "3 sets of 5-8"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*1.38.toInt()
-            else weight = weigh*1.43.toInt()
+                weight = (weigh*1.38).toInt()
+            else weight = (weigh*1.43).toInt()
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=1ZXobu7JvvE")
     }
     fun curl(weigh:Int): Workout {
         val w = "Dumbbell Curl"
         val r = "3 sets of 8-10"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*0.2.toInt()
-            else weight = weigh*0.25.toInt()
+                weight = (weigh*0.2).toInt()
+            else weight = (weigh*0.25).toInt()
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=sAq_ocpRh_I")
     }
     fun lunge(weigh:Int): Workout {
         val w = "Dumbbell Lunge"
         val r = "3 sets of 5-8 Each Leg"
         val weight: Int
             if (weigh <= 150)
-                weight = weigh*0.4.toInt()
-            else weight = weigh*0.43.toInt()
+                weight = (weigh*0.4).toInt()
+            else weight = (weigh*0.43).toInt()
 
-        return Workout(w, weight, r)
+        return Workout(w, weight, r, "https://www.youtube.com/watch?v=D7KaRcUTQeE")
     }
     fun pushUp(): Workout {
-        return Workout("Push-ups", 0, "2 sets until failure")
+        return Workout("Push-ups", 0, "2 sets until failure", "https://www.youtube.com/watch?v=0pkjOk0EiAk")
     }
     fun sitUp(): Workout {
-        return Workout("Sit-ups", 0, "2 sets until failure")
+        return Workout("Sit-ups", 0, "2 sets until failure", "https://www.youtube.com/watch?v=8Ax9H9VPdm4")
     }
     fun jumpRope(): Workout{
-        return Workout("Jump-Rope", 0, "3 sets of 1 minute Straight")
+        return Workout("Jump-Rope", 0, "3 sets of 1 minute Straight", "https://www.youtube.com/watch?v=82jNjDS19lg")
     }
     fun run(age:Int, g:Boolean):Workout{
         var x=0
@@ -158,10 +158,10 @@ class WorkoutChoiceFragment : Fragment() {
         else if (!g)
             x += 140
         val s="Average Mile Run Time for Weight/Gender: ${x/60} minutes ${x%60}seconds"
-        return Workout("1 Mile Run",0, s)
+        return Workout("1 Mile Run",0, s, "https://www.youtube.com/watch?v=24iVDwOHLs8")
     }
     fun burpees(): Workout{
-        return Workout("Burpees", 0,"2 sets of 15" )
+        return Workout("Burpees", 0,"2 sets of 15", "https://www.youtube.com/watch?v=auBLPXO8Fww" )
     }
 
 }
