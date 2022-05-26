@@ -1,5 +1,7 @@
 package com.example.fitnessapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,26 @@ class CongratsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCongratsBinding.inflate(inflater, container, false)
+        val args=CongratsFragmentArgs.fromBundle(requireArguments())
+        var s: String
+        if(args.typerArg==0){
+            s="Muscle Build"
+        }
+        else if(args.typerArg==1){
+            s="Maintain Muscle"
+        }
+        else s="Cardio"
+        binding.welcomeText.text="Congratulations ${args.finisherArg}! You Completed your ${s} Workout!"
+        binding.imageButton.setOnClickListener{
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_TEXT, "Today I did a ${s} workout. You should try FitnessApp Sometime!")
+                putExtra(Intent.EXTRA_SUBJECT, "I Finished my Workout on Fitness App!")
+                putExtra(Intent.EXTRA_EMAIL, "dinosrock1@gmail.com")
+            }
+            startActivity(intent)
+
+        }
         return binding.root
     }
     override fun onDestroyView() {

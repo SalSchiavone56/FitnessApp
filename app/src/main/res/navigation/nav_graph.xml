@@ -54,15 +54,32 @@
         <argument
             android:name="w6Arg"
             app:argType="com.example.fitnessapp.Workout" />
+        <argument
+            android:name="nameArg"
+            app:argType="string" />
+        <argument
+            android:name="typeArg"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/congratsFragment"
         android:name="com.example.fitnessapp.CongratsFragment"
         android:label="fragment_congrats"
-        tools:layout="@layout/fragment_congrats" />
+        tools:layout="@layout/fragment_congrats" >
+        <argument
+            android:name="finisherArg"
+            app:argType="string" />
+        <argument
+            android:name="typerArg"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/dietFragment"
         android:name="com.example.fitnessapp.DietFragment"
         android:label="fragment_diet"
-        tools:layout="@layout/fragment_diet" />
+        tools:layout="@layout/fragment_diet" >
+        <argument
+            android:name="caloriesArg"
+            app:argType="integer" />
+    </fragment>
 </navigation>

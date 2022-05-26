@@ -31,7 +31,7 @@ class CalculatedWorkout : Fragment() {
         val mAdapter=WorkoutAdapter(list)
         binding.recyclerView.adapter=mAdapter
         binding.doneButton.setOnClickListener{
-            val action = CalculatedWorkoutDirections.actionCalculatedWorkoutToCongratsFragment()
+            val action = CalculatedWorkoutDirections.actionCalculatedWorkoutToCongratsFragment(args.nameArg, args.typeArg)
             rootview.findNavController().navigate(action)
         }
 

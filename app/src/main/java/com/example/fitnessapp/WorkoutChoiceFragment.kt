@@ -31,16 +31,21 @@ class WorkoutChoiceFragment : Fragment() {
         else if(args.userArg.age in 40..60) {
             w =(w/1.2).toInt()
         }
+        var type: Int
     binding.nameText.text="Welcome ${args.userArg.username}!"
         binding.buildMuscleButton.setOnClickListener {
+            if (w!=args.userArg.weight)
+                w=(w*1.5).toInt()
             val benchPress = bench(w)
             val squat=squat(w)
             val press=shoulderPress(w)
             val deadlift=deadlift(w)
             val curl=curl(w)
             val lunge=lunge(w)
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(benchPress,squat,press,deadlift,curl,lunge)
+            type=0
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(benchPress,squat,press,deadlift,curl,lunge,args.userArg.username, type)
             rootview.findNavController().navigate(action)
+
         }
         binding.maintainMuscleButton.setOnClickListener{
             w =(w/1.5).toInt()
@@ -50,18 +55,25 @@ class WorkoutChoiceFragment : Fragment() {
             val curl=curl(w)
             val pushUps=pushUp()
             val sitUps=sitUp()
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(bench,squat,lunge,curl,pushUps, sitUps)
+            type=1
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(bench,squat,lunge,curl,pushUps, sitUps,args.userArg.username, type)
             rootview.findNavController().navigate(action)
         }
         binding.cardioButton.setOnClickListener{
             val rope=jumpRope()
             val run=run(args.userArg.age, args.userArg.gender)
             val burpees=burpees()
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(rope, run, burpees, run, run, run)
+            type=2
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToCalculatedWorkout(rope, run, burpees, run, run, run,args.userArg.username, type)
             rootview.findNavController().navigate(action)
         }
         binding.dietButton.setOnClickListener {
-            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToDietFragment()
+            var calories=0
+            if (!args.userArg.gender){
+                calories=((9.247*(args.userArg.weight*0.45359237) + 3.098*(args.userArg.height) - 4.330*(args.userArg.age) + 447.593)*1.575).toInt()
+            }
+            else calories=((13.397*(args.userArg.weight*0.45359237) + 4.799* (args.userArg.height) - 5.677*(args.userArg.age) + 88.362)*1.575).toInt()
+            val action = WorkoutChoiceFragmentDirections.actionWorkoutChoiceFragmentToDietFragment(calories)
             rootview.findNavController().navigate(action)
         }
 
@@ -157,7 +169,7 @@ class WorkoutChoiceFragment : Fragment() {
             x += 70
         else if (!g)
             x += 140
-        val s="Average Mile Run Time for Weight/Gender: ${x/60} minutes ${x%60}seconds"
+        val s="Average Mile Run Time for Age/Gender: ${x/60} minutes ${x%60} seconds"
         return Workout("1 Mile Run",0, s, "https://www.youtube.com/watch?v=24iVDwOHLs8")
     }
     fun burpees(): Workout{
