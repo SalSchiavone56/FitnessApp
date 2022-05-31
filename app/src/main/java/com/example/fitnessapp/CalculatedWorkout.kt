@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.navigation.findNavController
 import com.example.fitnessapp.databinding.CalculatedWorkoutBinding
 
@@ -31,6 +32,7 @@ class CalculatedWorkout : Fragment() {
         val mAdapter=WorkoutAdapter(list)
         binding.recyclerView.adapter=mAdapter
         binding.doneButton.setOnClickListener{
+            binding.calculatedWorkout.startAnimation(AnimationUtils.loadAnimation(this.context, androidx.appcompat.R.anim.abc_slide_out_top))
             val action = CalculatedWorkoutDirections.actionCalculatedWorkoutToCongratsFragment(args.nameArg, args.typeArg)
             rootview.findNavController().navigate(action)
         }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.example.fitnessapp.databinding.FragmentCongratsBinding
 
 
@@ -37,6 +38,10 @@ class CongratsFragment : Fragment() {
                 putExtra(Intent.EXTRA_EMAIL, "dinosrock1@gmail.com")
             }
             startActivity(intent)
+
+        }
+        binding.rocky.setOnClickListener{
+            binding.rocky.startAnimation(AnimationUtils.loadAnimation(this.context, androidx.appcompat.R.anim.abc_slide_out_top))
 
         }
         return binding.root
