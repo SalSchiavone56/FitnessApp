@@ -9,7 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.example.fitnessapp.databinding.FragmentDietBinding
-import java.math.BigInteger
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 
 
 class DietFragment : Fragment() {
@@ -18,7 +19,6 @@ class DietFragment : Fragment() {
     private val viewModel:DietViewModel by viewModels()
     lateinit var s:String
     lateinit var c:String
-     var num=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +35,16 @@ class DietFragment : Fragment() {
         }
         viewModel.caloriesLeft.observe(viewLifecycleOwner){amount->
             if(viewModel.totalCalories.value==0)
-            binding.leftCalories.text="${args.caloriesArg} left"
+                binding.leftCalories.text = "${args.caloriesArg} left"
             else binding.leftCalories.text="${amount} left"
+            if(amount<=0){
+                    val snackBar=Snackbar.make(
+                        binding.relativeLayout,
+                        R.string.reached,
+                        Snackbar.LENGTH_SHORT)
+                    snackBar.show()
+
+            }
 
         }
         binding.welcomeText.text="Maintenance Calories: ${args.caloriesArg} cal"
@@ -48,7 +56,8 @@ class DietFragment : Fragment() {
             c+="${binding.calText.text} calories\n"
             binding.mealsText.text=s
             binding.caloriesTextview.text=c
-//            updateCalView()
+
+
         }
         binding.resetButton.setOnClickListener {
             viewModel.resetCalories()
@@ -57,7 +66,7 @@ class DietFragment : Fragment() {
             binding.mealsText.text=s
             binding.caloriesTextview.text=c
             viewModel.calculateRemaining(viewModel.totalCalories.value ?: 0)
-//           updateCalView()
+
         }
         return binding.root
     }
@@ -65,14 +74,5 @@ class DietFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-//    fun updateCalView(){
-//        binding.total.text="Total Calories: ${viewModel.totalCalories.value.toString()}"
-//        if (viewModel.caloriesLeft.value == 0){
-//            binding.leftCalories.text = "${num} left"
-//        }
-//        else binding.leftCalories.text="${viewModel.caloriesLeft.value.toString()} left"
-//        binding.mealsText.text=s
-//        binding.caloriesTextview.text=c
-//    }
 
 }

@@ -7,4 +7,5 @@
     <string name="enter_weight">Enter Weight (pounds)</string>
     <string name="enter_height">Enter Height (in inches)</string>
     <string name="toast_message">You Must Enter Info for all Spaces Above!</string>
+    <string name="reached">Maintenance Calories Reached!</string>
 </resources>

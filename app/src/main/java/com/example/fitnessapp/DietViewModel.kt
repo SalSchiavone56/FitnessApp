@@ -9,7 +9,7 @@ class DietViewModel : ViewModel() {
     val totalCalories: LiveData<Int>
     get() = _totalCalories
 
-    private var _caloriesLeft= MutableLiveData(0)
+    private var _caloriesLeft= MutableLiveData(1)
     val caloriesLeft: LiveData<Int>
         get() = _caloriesLeft
 
