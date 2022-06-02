@@ -52,4 +52,14 @@
         app:layout_constraintStart_toStartOf="@+id/welcome_text"
         app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
 
+    <ImageView
+        android:id="@+id/cam"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_baseline_camera_alt_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rocky"
+        app:layout_constraintStart_toStartOf="@+id/rocky"
+        app:layout_constraintTop_toBottomOf="@+id/rocky" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
